@@ -1,53 +1,61 @@
 package org.enset.ebanking_service.web;
 
+import org.enset.ebanking_service.dto.BankAccountRequestDTO;
+import org.enset.ebanking_service.dto.BankAccountResponseDTO;
 import org.enset.ebanking_service.entities.BankAccount;
-import org.enset.ebanking_service.repositories.BankAccountRepository;
+import org.enset.ebanking_service.mappers.AccountMapper;
+import org.enset.ebanking_service.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
 public class AccountRestController {
-    public BankAccountRepository bankAccountRepository;
 
-    public AccountRestController(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
+    private final AccountService accountService;
+    private final AccountMapper accountMapper;
+
+    public AccountRestController(AccountService accountService, AccountMapper accountMapper) {
+        this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
+
 
     @GetMapping("/bankAccounts")
-    public List<BankAccount> bankAccounts(){
-        return bankAccountRepository.findAll();
+    public List<BankAccountResponseDTO> getAllAccounts() {
+        return accountService.listAccounts().stream()
+                .map(accountMapper::fromBankAccount)
+                .collect(Collectors.toList());
     }
+
 
     @GetMapping("/bankAccounts/{id}")
-    public BankAccount bankAccount(@PathVariable String id){
-        return bankAccountRepository.findById(id)
-                .orElseThrow(()->new RuntimeException(String.format("bank account not found",id)));
+    public BankAccountResponseDTO getAccountById(@PathVariable String id) {
+        BankAccount account = accountService.getAccountEntity(id);
+        return accountMapper.fromBankAccount(account);
     }
+
+
     @PostMapping("/bankAccounts")
-    public BankAccount save (@RequestBody BankAccount bankAccount){
-        if(bankAccount.getId()==null)bankAccount.setId(UUID.randomUUID().toString());
-
-        return bankAccountRepository.save(bankAccount);
+    public BankAccountResponseDTO createAccount(@RequestBody BankAccountRequestDTO requestDTO) {
+        BankAccount account = accountMapper.fromBankAccountRequestDTO(requestDTO);
+        BankAccount saved = accountService.addAccountEntity(account);
+        return accountMapper.fromBankAccount(saved);
     }
+
+
     @PutMapping("/bankAccounts/{id}")
-    public BankAccount update(@PathVariable String id, @RequestBody BankAccount bankAccount){
-        BankAccount account = bankAccountRepository.findById(id).orElseThrow();
-        if (account.getBalance()!=null) account.setBalance(bankAccount.getBalance());
-        if (account.getCreatedAt()!=null) account.setCreatedAt(new Date());
-        if (account.getType()!=null) account.setType(bankAccount.getType());
-        if(account.getCurrency()!=null) account.setCurrency(bankAccount.getCurrency());
-        return bankAccountRepository.save(account);
+    public BankAccountResponseDTO updateAccount(@PathVariable String id,
+                                                @RequestBody BankAccountRequestDTO requestDTO) {
+        BankAccount updated = accountService.updateAccountEntity(id, requestDTO);
+        return accountMapper.fromBankAccount(updated);
     }
+
+
     @DeleteMapping("/bankAccounts/{id}")
-    public void deleteAccount (@PathVariable String id){
-        bankAccountRepository.deleteById(id);
-
+    public void deleteAccount(@PathVariable String id) {
+        accountService.deleteAccount(id);
     }
-
-
-
 }
