@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class AccountRestController {
@@ -19,6 +20,7 @@ public class AccountRestController {
     public List<BankAccount> bankAccounts(){
         return bankAccountRepository.findAll();
     }
+
     @GetMapping("/bankAccounts/{id}")
     public BankAccount bankAccount(@PathVariable String id){
         return bankAccountRepository.findById(id)
@@ -26,6 +28,8 @@ public class AccountRestController {
     }
     @PostMapping("/bankAccounts")
     public BankAccount save (@RequestBody BankAccount bankAccount){
+        if(bankAccount.getId()==null)bankAccount.setId(UUID.randomUUID().toString());
+
         return bankAccountRepository.save(bankAccount);
     }
     @PutMapping("/bankAccounts/{id}")
@@ -42,5 +46,7 @@ public class AccountRestController {
         bankAccountRepository.deleteById(id);
 
     }
+
+
 
 }
