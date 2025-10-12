@@ -1,14 +1,14 @@
 package org.enset.ebanking_service.service;
 
 import org.enset.ebanking_service.dto.BankAccountRequestDTO;
-import org.enset.ebanking_service.entities.BankAccount;
+import org.enset.ebanking_service.dto.BankAccountResponseDTO;
 
 import java.util.List;
 
 public interface AccountService {
-    BankAccount addAccountEntity(BankAccount bankAccount);
-    BankAccount getAccountEntity(String id);
-    List<BankAccount> listAccounts();
-    BankAccount updateAccountEntity(String id, BankAccountRequestDTO requestDTO);
+    BankAccountResponseDTO addAccount(BankAccountRequestDTO bankAccountDTO);
+    BankAccountResponseDTO getAccount(String id);
+    List<BankAccountResponseDTO> listAccounts();
+    BankAccountResponseDTO updateAccount(String id, BankAccountRequestDTO bankAccountDTO);
     void deleteAccount(String id);
 }
