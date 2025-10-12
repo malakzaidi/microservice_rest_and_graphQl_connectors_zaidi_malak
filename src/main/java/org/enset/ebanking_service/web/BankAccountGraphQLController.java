@@ -3,14 +3,15 @@ package org.enset.ebanking_service.web;
 import org.enset.ebanking_service.dto.BankAccountRequestDTO;
 import org.enset.ebanking_service.dto.BankAccountResponseDTO;
 import org.enset.ebanking_service.entities.BankAccount;
+import org.enset.ebanking_service.entities.Customer;
 import org.enset.ebanking_service.repositories.BankAccountRepository;
+import org.enset.ebanking_service.repositories.CustomerRepository;
 import org.enset.ebanking_service.service.AccountService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ public class BankAccountGraphQLController {
 
     private BankAccountRepository  bankAccountRepository;
     private AccountService accountService;
-    public BankAccountGraphQLController(BankAccountRepository bankAccountRepository, AccountService accountService) {
+    private CustomerRepository customerRepository;
+    public BankAccountGraphQLController(BankAccountRepository bankAccountRepository, AccountService accountService, CustomerRepository customerRepository) {
         this.bankAccountRepository = bankAccountRepository;
         this.accountService = accountService;
+        this.customerRepository = customerRepository;
     }
 
     @QueryMapping
@@ -53,6 +56,11 @@ public class BankAccountGraphQLController {
     @MutationMapping
     public void deleteAccount(@Argument String id) {
         accountService.deleteAccount(id);
+    }
+
+    @QueryMapping
+    public List<Customer> customers(){
+        return customerRepository.findAll();
     }
 
 
