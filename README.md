@@ -6,9 +6,56 @@
 
 > **A comprehensive demonstration and comparison between Traditional RESTful APIs and GraphQL architectures through account management microservice implementation.**
 
+<img width="1055" height="710" alt="image" src="https://github.com/user-attachments/assets/9f484764-570e-4681-8390-34eaa6b52995" />
+
+
+## REST :
+- Test des endpoints :
+
+  <img width="1905" height="1087" alt="Screenshot 2025-10-12 112736" src="https://github.com/user-attachments/assets/9282cf15-54bc-4729-bb46-a5177da353c3" />
+
+  <img width="1919" height="1082" alt="Screenshot 2025-10-12 112954" src="https://github.com/user-attachments/assets/44b2253c-0d21-4517-b08d-497e30604088" />
+
+  <img width="1280" height="1059" alt="Screenshot 2025-10-12 120519" src="https://github.com/user-attachments/assets/50d9b94e-0605-4b67-a40b-a51c2cc0a786" />
+
+  <img width="807" height="1065" alt="Screenshot 2025-10-12 120534" src="https://github.com/user-attachments/assets/44439835-1879-4687-8389-f10c42bd89d2" />
+
+  - Recherche d'un compte par son Id:
+    
+    <img width="1211" height="482" alt="Screenshot 2025-10-12 121230" src="https://github.com/user-attachments/assets/248610df-6281-4ddf-be86-9b890effa78c" />
+
+  - Recherche d'un compte par son type :
+
+    <img width="1193" height="826" alt="Screenshot 2025-10-12 122916" src="https://github.com/user-attachments/assets/9e6ba358-82b2-44b2-9349-181faddbd44c" />
+
+  - Test des projections :
+
+    <img width="1151" height="1056" alt="Screenshot 2025-10-12 123611" src="https://github.com/user-attachments/assets/2318b6f7-07fe-4e88-b01a-9aff6b4c04e9" />
+
+  - GraphQL :
+
+    <img width="1852" height="988" alt="Screenshot 2025-10-12 162250" src="https://github.com/user-attachments/assets/a3b3ae8f-645e-4c15-9ba4-ebfd58ef7084" />
+
+    <img width="1786" height="778" alt="Screenshot 2025-10-12 163522" src="https://github.com/user-attachments/assets/269f759d-90a1-4560-9799-b98a00f5dc92" />
+
+    <img width="1700" height="483" alt="Screenshot 2025-10-12 163708" src="https://github.com/user-attachments/assets/b0cdc9ef-8e49-446e-a344-d774a95fec11" />
+
+
+    - Test des mutations :
+   
+    <img width="1642" height="389" alt="Screenshot 2025-10-12 172928" src="https://github.com/user-attachments/assets/3e6100a5-c605-4db2-8980-47da1fca3681" />
+
+    <img width="1640" height="842" alt="Screenshot 2025-10-12 180036" src="https://github.com/user-attachments/assets/efa82728-ea8c-4a1b-94a5-2e3c9796b73f" />
+
+     <img width="1750" height="845" alt="Screenshot 2025-10-12 181355" src="https://github.com/user-attachments/assets/91aa692e-ada5-4519-a58a-f5d5464bc2a5" />
+
+     <img width="1596" height="578" alt="Screenshot 2025-10-12 182656" src="https://github.com/user-attachments/assets/91895608-385a-4a81-86ad-a4a167ea62c5" />
+
+     <img width="1753" height="896" alt="Screenshot 2025-10-12 192747" src="https://github.com/user-attachments/assets/9fc34d61-69aa-4fb5-9780-ec9c0d772fc4" />
+
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [About This Repository](#about-this-repository)
 - [Repository Metrics](#repository-metrics)
@@ -28,7 +75,7 @@
 
 ---
 
-## 🎯 About This Repository
+##  About This Repository
 
 This project implements a **single microservice** designed for **Compte (Account) management**. Its primary function is to serve as a **comprehensive demonstration and comparison** between two major web service architectures:
 
@@ -37,7 +84,7 @@ This project implements a **single microservice** designed for **Compte (Account
 
 The repository showcases **real-world implementation patterns**, addresses common architectural challenges (such as the *boucle infinie* serialization problem in REST), and demonstrates best practices for building modern, production-ready microservices using the Spring Boot ecosystem.
 
-### 🎓 Educational Objectives
+###  Educational Objectives
 
 This project follows a structured learning approach based on:
 - **Video Tutorial 1**: [Creating a Microservice for Bank Account Management](https://www.youtube.com/watch?v=2-qIoZcvhAw)
@@ -45,7 +92,7 @@ This project follows a structured learning approach based on:
 
 ---
 
-## 📊 Repository Metrics
+##  Repository Metrics
 
 | Metric | Detail |
 |--------|--------|
@@ -59,7 +106,7 @@ This project follows a structured learning approach based on:
 
 ---
 
-## 🏗 Project Architecture
+##  Project Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -121,7 +168,7 @@ This project follows a structured learning approach based on:
 
 ---
 
-## 🛠 Technologies Stack
+##  Technologies Stack
 
 ### Core Framework
 | Technology | Version | Purpose |
@@ -158,7 +205,7 @@ This project follows a structured learning approach based on:
 
 ---
 
-## 📚 Project Implementation: Travaux à Faire
+##  Project Implementation
 
 The development process was structured into **11 distinct tasks**, ensuring robust separation of concerns and covering multiple API exposure methods.
 
@@ -1038,7 +1085,7 @@ GET http://localhost:8080/comptes-rest?projection=compteProjection
 
 ---
 
-### **⚠️ Critical REST Serialization Challenge: The Boucle Infinie (Infinite Loop)**
+### ** Critical REST Serialization Challenge: The Boucle Infinie (Infinite Loop)**
 
 A **significant architectural issue** in REST APIs built directly on JPA entities is the **boucle infinie** (infinite loop) that occurs during JSON serialization.
 
@@ -1082,7 +1129,7 @@ public class Compte {
     private Long id;
     
     @OneToMany(mappedBy = "compte")
-    @JsonManagedReference  // ❌ API concern in domain model
+    @JsonManagedReference  
     private List<Transaction> transactions;
 }
 
@@ -1092,15 +1139,15 @@ public class Transaction {
     private Long id;
     
     @ManyToOne
-    @JsonBackReference  // ❌ API concern in domain model
+    @JsonBackReference  
     private Compte compte;
 }
 ```
 
 **Problems with This Approach:**
-- ❌ **Tight Coupling**: API serialization logic pollutes domain entities
-- ❌ **Single Representation**: Can't have different JSON views
-- ❌ **Maintenance Nightmare**: Changes to API affect database model
+-  **Tight Coupling**: API serialization logic pollutes domain entities
+-  **Single Representation**: Can't have different JSON views
+-  **Maintenance Nightmare**: Changes to API affect database model
 
 **Superior Solution: DTO Pattern (Used in This Project)**
 
@@ -1112,7 +1159,7 @@ public class Compte {
     private Long id;
     
     @OneToMany(mappedBy = "compte")
-    private List<Transaction> transactions;  // ✅ No serialization annotations
+    private List<Transaction> transactions;  //  No serialization annotations
 }
 
 // DTO for API exposure
@@ -1121,7 +1168,7 @@ public class CompteDTO {
     private Double solde;
     private Date dateCreation;
     private TypeCompte type;
-    // ✅ No bidirectional references
+    //  No bidirectional references
 }
 ```
 
@@ -2171,7 +2218,7 @@ mutation {
 
 ---
 
-## 🧪 Testing Guide
+##  Testing Guide
 
 ### **1. Manual Testing with Postman**
 
@@ -2379,45 +2426,45 @@ class CompteServiceTest {
 
 ---
 
-## 🎓 Key Learnings
+##  Key Learnings
 
 ### **1. Architectural Patterns**
 
-✅ **Layered Architecture**: Clear separation of concerns (Web → Service → Repository)
-✅ **DTO Pattern**: Decoupling domain model from API representation
-✅ **Repository Pattern**: Abstraction over data access
-✅ **Service Layer**: Business logic encapsulation
+ **Layered Architecture**: Clear separation of concerns (Web → Service → Repository)
+ **DTO Pattern**: Decoupling domain model from API representation
+ **Repository Pattern**: Abstraction over data access
+ **Service Layer**: Business logic encapsulation
 
 ### **2. Spring Boot Ecosystem**
 
-✅ **Spring Data JPA**: Eliminates boilerplate repository code
-✅ **Spring Data REST**: Rapid API prototyping
-✅ **Spring GraphQL**: Modern API development
-✅ **MapStruct**: Type-safe DTO mapping
+ **Spring Data JPA**: Eliminates boilerplate repository code
+ **Spring Data REST**: Rapid API prototyping
+ **Spring GraphQL**: Modern API development
+ **MapStruct**: Type-safe DTO mapping
 
 ### **3. API Design Principles**
 
-✅ **RESTful Design**: Resource-based URLs, HTTP verbs, status codes
-✅ **GraphQL Schema**: Strong typing, client-driven queries
-✅ **HATEOAS**: Hypermedia controls in responses
-✅ **API Documentation**: OpenAPI/Swagger for discoverability
+ **RESTful Design**: Resource-based URLs, HTTP verbs, status codes
+ **GraphQL Schema**: Strong typing, client-driven queries
+ **HATEOAS**: Hypermedia controls in responses
+ **API Documentation**: OpenAPI/Swagger for discoverability
 
 ### **4. Common Pitfalls Addressed**
 
-✅ **Boucle Infinie**: Solved with DTOs, not entity annotations
-✅ **Over-fetching/Under-fetching**: Solved with GraphQL and projections
-✅ **Transaction Management**: Proper `@Transactional` usage
-✅ **Exception Handling**: Global error handlers
+ **Boucle Infinie**: Solved with DTOs, not entity annotations
+ **Over-fetching/Under-fetching**: Solved with GraphQL and projections
+ **Transaction Management**: Proper `@Transactional` usage
+ **Exception Handling**: Global error handlers
 
 ### **5. Best Practices Applied**
 
-✅ **Validation**: Input validation with Bean Validation
-✅ **Logging**: Structured logging with SLF4J
-✅ **Builder Pattern**: Lombok `@Builder` for object creation
-✅ **Immutability**: DTOs are effectively immutable
-✅ **Testing**: Comprehensive test coverage
+ **Validation**: Input validation with Bean Validation
+ **Logging**: Structured logging with SLF4J
+ **Builder Pattern**: Lombok `@Builder` for object creation
+ **Immutability**: DTOs are effectively immutable
+ **Testing**: Comprehensive test coverage
 
-## 📖 References & Resources
+##  References & Resources
 
 ### **Official Documentation**
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
@@ -2484,7 +2531,7 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Spring Boot team for the amazing framework
 - GraphQL community for innovative API design
@@ -2493,20 +2540,19 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-## 📧 Support & Contact
+##  Support & Contact
 
 If you have any questions, issues, or suggestions:
 
-- 📫 Open an [Issue](https://github.com/malakzaidi/microservice_rest_and_graphQl_connectors/issues)
-- 💬 Start a [Discussion](https://github.com/malakzaidi/microservice_rest_and_graphQl_connectors/discussions)
-- ⭐ Star the repository if you find it useful!
+-  Open an [Issue](https://github.com/malakzaidi/microservice_rest_and_graphQl_connectors/issues)
+-  Start a [Discussion](https://github.com/malakzaidi/microservice_rest_and_graphQl_connectors/discussions)
+-  Star the repository if you find it useful!
 
 ---
 
 <div align="center">
 
-### ⭐ Star this repository if you found it helpful!
+###  Star this repository if you found it helpful!
 
-**Made with ❤️ using Spring Boot, REST, and GraphQL**
 
 </div>
